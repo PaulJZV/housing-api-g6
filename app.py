@@ -1,14 +1,13 @@
 from flask import Flask,request,jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
+from decouple import config
 
 app = Flask(__name__)
 
 #### CONFIGURACION DE SQLALCHEMY ####
 app.app_context().push()
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root2025@localhost:3306/db_g6'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
+app.config['SQLALCHEMY_DATABASE_URI'] = config('DATABASE_URL')
 db = SQLAlchemy(app)
 
 ### CREAMOS UNA CLASE QUE VA A CONVERTIRSE EN UNA TABLA SQL
